@@ -1,0 +1,18 @@
+# Node.js
+/node_modules
+/dist
+/tmp
+
+# Terraform
+/.terraform
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+
+# IDEs
+.vscode/
+.idea/
+
+# System files
+.DS_Store
+Thumbs.db
