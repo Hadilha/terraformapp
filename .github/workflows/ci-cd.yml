@@ -44,11 +44,4 @@ jobs:
     - name: Push Flask image
       run: |
         docker push ${{ env.ACR_LOGIN_SERVER }}/flask-app:latest
-    # Restart Azure Web Apps
-    - name: Restart Angular Web App
-      run: |
-        az webapp restart --name angular-app-dx8a --resource-group res-grp
-
-    - name: Restart Flask Web App
-      run: |
-        az webapp restart --name flask-app-dx8a --resource-group res-grp
+   
