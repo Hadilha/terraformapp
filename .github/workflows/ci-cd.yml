@@ -29,10 +29,11 @@ jobs:
       run: |
         docker build -t ${{ env.ACR_LOGIN_SERVER }}/angular-app:latest -f angular-app/Dockerfile angular-app/
 
+
     # Build Flask image
     - name: Build Flask Docker image
       run: |
-        docker build -t ${{ env.ACR_LOGIN_SERVER }}/flask-app:latest -f flask-app/Dockerfile flask-app/
+        docker build -t ${{ env.ACR_LOGIN_SERVER }}/flask-app:latest -f flask-app/Dockerfile .
 
     # Push Angular image
     - name: Push Angular image
@@ -43,7 +44,6 @@ jobs:
     - name: Push Flask image
       run: |
         docker push ${{ env.ACR_LOGIN_SERVER }}/flask-app:latest
-
     # Restart Azure Web Apps
     - name: Restart Angular Web App
       run: |
