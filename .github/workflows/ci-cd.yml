@@ -1,0 +1,45 @@
+name: Build & Deploy Angular + Flask
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    env:
+      ACR_NAME: appregistrydx8a
+      ACR_LOGIN_SERVER: appregistrydx8a.azurecr.io
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Login to Azure Container Registry
+      uses: azure/docker-login@v1
+      with:
+        login-server: ${{ env.ACR_LOGIN_SERVER }}
+        username: ${{ secrets.ACR_USERNAME }}
+        password: ${{ secrets.ACR_PASSWORD }}
+
+    # Build Angular image
+    - name: Build Angular Docker image
+      run: |
+        docker build -t ${{ env.ACR_LOGIN_SERVER }}/angular-app:latest -f angular-app/Dockerfile .
+
+    # Build Flask image
+    - name: Build Flask Docker image
+      run: |
+        docker build -t ${{ env.ACR_LOGIN_SERVER }}/flask-app:latest -f flask-app/Dockerfile .
+
+    # Push Angular image
+    - name: Push Angular image
+      run: |
+        docker push ${{ env.ACR_LOGIN_SERVER }}/angular-app:latest
+
+    # Push Flask image
+    - name: Push Flask image
+      run: |
+        docker push ${{ env.ACR_LOGIN_SERVER }}/flask-app:latest
