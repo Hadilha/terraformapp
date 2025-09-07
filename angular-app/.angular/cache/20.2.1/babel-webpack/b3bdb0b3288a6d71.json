@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { TheApp } from './the-app/the-app';\nexport const appRoutes = [{\n  path: '',\n  component: TheApp\n}, {\n  path: '**',\n  redirectTo: ''\n}];","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

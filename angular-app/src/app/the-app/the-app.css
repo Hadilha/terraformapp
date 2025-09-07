@@ -1,0 +1,186 @@
+/* ===== THE APP DASHBOARD ===== */
+.dashboard {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  color: #e0e0ff;
+  animation: childFade 0.8s ease forwards;
+}
+
+/* Headings */
+.dashboard h2 {
+  font-size: 2.5rem;
+  color: #9a6bff;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 8px rgba(154, 107, 255, 0.5);
+}
+
+.dashboard .subtitle {
+  font-size: 1.2rem;
+  color: #c0c0ff;
+  margin-bottom: 2rem;
+  opacity: 0.8;
+}
+
+/* Loading indicator */
+.loading {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #6ea8fe;
+  margin: 20px 0;
+}
+
+/* KPI cards */
+.kpi-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.kpi-card {
+  flex: 1 1 150px;
+  background: rgba(25, 20, 50, 0.6);
+  border: 1px solid rgba(154, 107, 255, 0.2);
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(154, 107, 255, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.kpi-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(154, 107, 255, 0.6);
+}
+
+.kpi-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.kpi-value {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #6ea8fe;
+}
+
+/* Summary row */
+.summary-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.summary-left {
+  flex: 2;
+}
+
+.summary-heading h3 {
+  font-size: 1.8rem;
+  color: #9a6bff;
+  text-shadow: 0 0 8px rgba(154, 107, 255, 0.5);
+  margin-bottom: 0.3rem;
+}
+
+.summary-heading .version {
+  font-size: 0.9rem;
+  color: #c0c0ff;
+  margin-left: 0.5rem;
+}
+
+.meta {
+  font-size: 0.9rem;
+  color: #aaaaff;
+  margin-bottom: 0.5rem;
+}
+
+.tags {
+  margin-bottom: 0.5rem;
+}
+
+.tag {
+  display: inline-block;
+  background: rgba(154, 107, 255, 0.2);
+  color: #e0e0ff;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  margin-right: 5px;
+}
+
+/* Infrastructure badges */
+.infra {
+  margin-top: 0.5rem;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 0.8rem;
+  padding: 4px 8px;
+  border-radius: 8px;
+  margin-right: 5px;
+}
+
+.badge.ok {
+  background-color: rgba(40, 167, 69, 0.2);
+  color: #28a745;
+}
+
+.badge.bad {
+  background-color: rgba(220, 53, 69, 0.2);
+  color: #dc3545;
+}
+
+/* Quality card */
+.quality-card {
+  flex: 1;
+  background: rgba(25, 20, 50, 0.6);
+  border: 1px solid rgba(154, 107, 255, 0.2);
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(154, 107, 255, 0.3);
+}
+
+.quality-score {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+.quality-score.good { color: #28a745; }
+.quality-score.mid { color: #ffc107; }
+.quality-score.low { color: #dc3545; }
+
+/* Charts row */
+.charts-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.card {
+  flex: 1;
+  background: rgba(25, 20, 50, 0.6);
+  border: 1px solid rgba(154, 107, 255, 0.2);
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(154, 107, 255, 0.3);
+}
+
+/* Folder & narrative section */
+.bottom-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.narrative pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  color: #c0c0ff;
+}

@@ -1,0 +1,25 @@
+<div *ngIf="root">
+  <!-- Show folders -->
+  <div *ngFor="let dir of root.folders || []" class="folder">
+    <div class="folder-name" (click)="toggle(dir)">
+      {{ dir.__open ? '📂' : '📁' }} {{ dir.name }}
+    </div>
+
+    <div class="children" *ngIf="dir.__open">
+      <!-- Show files -->
+      <div *ngFor="let file of dir.files || []">📄 {{ file }}</div>
+      <!-- Recursive call for subfolders -->
+ <app-folder-tree
+  *ngIf="dir.contents"
+  [root]="{
+    name: dir.name + '-contents',
+    folders: dir.contents.folders || [],
+    files: dir.contents.files || []
+  }"
+></app-folder-tree>
+    </div>
+  </div>
+
+  <!-- Show files at root level -->
+  <div *ngFor="let file of root.files || []">📄 {{ file }}</div>
+</div>

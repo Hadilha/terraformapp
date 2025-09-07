@@ -1,0 +1,7 @@
+# Ensure consistent line endings
+* text=auto
+
+# Ignore node_modules and binaries
+node_modules/* -text
+.terraform/* -text
+dist/* -text

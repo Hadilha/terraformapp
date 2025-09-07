@@ -1,0 +1,95 @@
+<div> 
+<app-how-it-is-built></app-how-it-is-built>
+
+<div class="dashboard">
+
+ 
+  <h2>🚀 Intelligent Dashboard</h2>
+  <p class="subtitle">Live insights powered by Flask API</p>
+
+  <!-- Loading state -->
+  <div *ngIf="loading" class="loading">Analyzing your project…</div>
+
+  <!-- Fallback when no data -->
+  <div *ngIf="!loading && !insight()">No project data available</div>
+
+  <!-- Main content -->
+  <ng-container *ngIf="!loading && insight() as data">
+
+    <!-- KPI Cards -->
+    <div class="kpi-grid">
+      <div class="kpi-card" *ngFor="let k of kpis()">
+        <div class="kpi-label">{{ k.label }}</div>
+        <div class="kpi-value">{{ k.value | number }}</div>
+      </div>
+    </div>
+
+    <!-- Summary Row -->
+    <div class="summary-row">
+      <div class="summary-left">
+        <div class="summary-heading">
+          <h3>{{ data.projectName }}</h3>
+          <span class="version">v{{ data.version }}</span>
+        </div>
+        <div class="meta">Analyzed: {{ data.analysisTimestamp | date:'medium' }}</div>
+        <div class="tags">
+          <span class="tag" *ngFor="let t of data.technologyStack">{{ t }}</span>
+        </div>
+        <div class="infra">
+          <span class="badge" [class.ok]="flag.ok" [class.bad]="!flag.ok" *ngFor="let flag of infraFlags()">
+            {{ flag.name }}: {{ flag.ok ? '✅' : '❌' }}
+          </span>
+        </div>
+      </div>
+
+      <div class="quality-card">
+        <h4>Code Quality</h4>
+        <ng-container *ngIf="isBrowser">
+          <canvas baseChart [type]="'doughnut'" [data]="qualityGaugeData" [options]="qualityOptions"></canvas>
+        </ng-container>
+        <div class="quality-score" [class.good]="data.codeQuality.score>80" 
+             [class.mid]="data.codeQuality.score>60 && data.codeQuality.score<=80" 
+             [class.low]="data.codeQuality.score<=60">
+          {{ data.codeQuality.score | number }} / 100
+        </div>
+        <ul class="issues" *ngIf="data.codeQuality.issues?.length">
+          <li *ngFor="let issue of data.codeQuality.issues">• {{ issue }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Charts Row -->
+    <div class="charts-grid">
+      <div class="card">
+        <h4>Lines of Code</h4>
+        <ng-container *ngIf="isBrowser">
+          <canvas baseChart [type]="'bar'" [data]="locBarData" [options]="locBarOptions"></canvas>
+        </ng-container>
+      </div>
+
+      <div class="card">
+        <h4>Technology Stack</h4>
+        <ng-container *ngIf="isBrowser">
+          <canvas baseChart [type]="'radar'" [data]="techStackData" [options]="techStackOptions"></canvas>
+        </ng-container>
+      </div>
+    </div>
+
+    <!-- Folder Explorer & Narrative -->
+    <div class="bottom-grid">
+      <div class="card">
+        <h4>Folder Structure</h4>
+        <app-folder-tree [root]="data.folderStructure"></app-folder-tree>
+      </div>
+      <div class="card narrative">
+        <h4>Executive Summary</h4>
+        <pre>{{ data.narrativeReport }}</pre>
+      </div>
+    </div>
+
+  </ng-container>
+</div>
+<app-infrastructure></app-infrastructure>
+<app-cicd></app-cicd>
+<app-live-on-azure></app-live-on-azure>
+</div>
