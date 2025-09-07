@@ -27,7 +27,8 @@ jobs:
     # Build Angular image
     - name: Build Angular Docker image
       run: |
-        docker build -t ${{ env.ACR_LOGIN_SERVER }}/angular-app:latest -f angular-app/Dockerfile .
+        docker build -t ${{ env.ACR_LOGIN_SERVER }}/angular-app:latest -f angular-app/Dockerfile angular-app/
+
 
     # Build Flask image
     - name: Build Flask Docker image
