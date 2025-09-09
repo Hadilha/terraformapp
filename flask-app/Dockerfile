@@ -4,7 +4,8 @@ WORKDIR /app
 COPY flask-app/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+COPY flask-app/ .
+
 
 # Run Flask with Gunicorn on port 5000
 EXPOSE 5000
