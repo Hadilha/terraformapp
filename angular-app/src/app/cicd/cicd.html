@@ -1,110 +1,189 @@
 <!-- src/app/cicd-diagram/cicd-diagram.component.html -->
-<div class="diagram-wrapper">
-  <header class="card-header" style="text-align: center; margin-bottom: 1rem;">
-    <h2 style="display: inline-flex; align-items: center; gap: 0.5rem; justify-content: center;">
-      <span class="card-icon"></span>
-      <span class="card-title">CI/CD Pipeline</span>
+<div class="diagram-wrapper" style="background: linear-gradient(135deg, #0f0f1a, #1a1a2e); padding: 3rem 2rem; border-radius: 20px;">
+  <header class="card-header" style="text-align: center; margin-bottom: 3rem;">
+    <h2 style="font-size: 2.2rem; font-weight: 700; background: linear-gradient(to right, #3b82f6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-flex; align-items: center; gap: 0.75rem;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+        <polyline points="16 7 22 7 22 13"></polyline>
+      </svg>
+      CI/CD Pipeline
     </h2>
-    <p class="card-subtitle">Automated deployment using <strong>GitHub Actions</strong>.</p>
+    <p class="card-subtitle" style="font-size: 1.15rem; color: #cbd5e1; margin-top: 0.5rem;">Automated parallel deployment of <strong style="color: #f97316;">Angular</strong> & <strong style="color: #10b981;">Flask</strong> with restart.</p>
   </header>
 
-  <svg width="100%" height="600" viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg">
+  <svg width="100%" height="1000" viewBox="0 0 1200 1000" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 10px 30px rgba(0,0,0,0.5)); font-family: 'Segoe UI', sans-serif;">
     <!-- Background -->
-    <rect width="1000" height="600" fill="#0f0f1a" rx="12" />
-
-    <!-- Arrow Markers -->
     <defs>
+      <linearGradient id="bg-gradient" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#0f0f1a" />
+        <stop offset="100%" stop-color="#1a1a2e" />
+      </linearGradient>
+      <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+        <feMerge>
+          <feMergeNode in="coloredBlur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+      <!-- Arrows -->
       <marker id="arrow-blue" markerWidth="12" markerHeight="12" refX="6" refY="6" orient="auto">
         <path d="M0,0 L0,12 L12,6 Z" fill="#3b82f6" />
       </marker>
       <marker id="arrow-green" markerWidth="12" markerHeight="12" refX="6" refY="6" orient="auto">
         <path d="M0,0 L0,12 L12,6 Z" fill="#10b981" />
       </marker>
+      <marker id="arrow-orange" markerWidth="12" markerHeight="12" refX="6" refY="6" orient="auto">
+        <path d="M0,0 L0,12 L12,6 Z" fill="#f97316" />
+      </marker>
       <marker id="arrow-purple" markerWidth="12" markerHeight="12" refX="6" refY="6" orient="auto">
         <path d="M0,0 L0,12 L12,6 Z" fill="#8b5cf6" />
       </marker>
-      <marker id="arrow-red" markerWidth="12" markerHeight="12" refX="6" refY="6" orient="auto">
-        <path d="M0,0 L0,12 L12,6 Z" fill="#ef4444" />
-      </marker>
     </defs>
 
+    <rect width="1200" height="1000" fill="url(#bg-gradient)" rx="24" />
+
+    <!-- ========== SHARED STAGES ========== -->
+
     <!-- GitHub -->
-    <g transform="translate(100, 100)">
-      <rect width="170" height="90" fill="#1e1e2f" rx="14" stroke="#3b82f6" stroke-width="2" />
-      <image href="https://cdn.jsdelivr.net/npm/simple-icons@7.1/icons/github.svg?color=ffffff"
-           x="15" y="25" width="40" height="40" 
-       style="filter: brightness(0) invert(1);" />
-      <text x="110" y="50" font-size="16" fill="#fff" text-anchor="middle">GitHub</text>
-      <text x="110" y="70" font-size="12" fill="#9ca3af" text-anchor="middle">main branch</text>
+    <g transform="translate(500, 80)">
+      <rect width="200" height="90" fill="#1e1e2f" rx="16" stroke="#3b82f6" stroke-width="2.5" filter="url(#glow)" />
+      <circle cx="40" cy="45" r="26" fill="#3b82f6" />
+      <image href="https://cdn.jsdelivr.net/npm/simple-icons@7.1/icons/github.svg?color=ffffff" x="27" y="32" width="26" height="26" />
+      <text x="125" y="40" font-size="16" font-weight="600" fill="#fff" text-anchor="middle">GitHub</text>
+      <text x="125" y="65" font-size="12" fill="#9ca3af" text-anchor="middle">Push to main</text>
     </g>
 
     <!-- GitHub Actions -->
-    <g transform="translate(320, 100)">
-      <rect width="170" height="90" fill="#1e1e2f" rx="14" stroke="#ef4444" stroke-width="2" />
-      <image href="https://cdn.jsdelivr.net/npm/simple-icons@7.1/icons/githubactions.svg?color=ffffff"
-         x="15" y="25" width="40" height="40" 
-       style="filter: brightness(0) invert(1);" />
-      <text x="110" y="50" font-size="16" fill="#fff" text-anchor="middle">GitHub Actions</text>
-      <text x="110" y="70" font-size="12" fill="#9ca3af" text-anchor="middle">CI/CD Workflow</text>
+    <g transform="translate(500, 200)">
+      <rect width="200" height="90" fill="#1e1e2f" rx="16" stroke="#ef4444" stroke-width="2.5" filter="url(#glow)" />
+      <circle cx="40" cy="45" r="26" fill="#ef4444" />
+      <image href="https://cdn.jsdelivr.net/npm/simple-icons@7.1/icons/githubactions.svg?color=ffffff" x="27" y="32" width="26" height="26" />
+      <text x="125" y="40" font-size="16" font-weight="600" fill="#fff" text-anchor="middle">GitHub Actions</text>
+      <text x="125" y="65" font-size="12" fill="#9ca3af" text-anchor="middle">Triggers Builds</text>
     </g>
 
-    <!-- Docker Build -->
-    <g transform="translate(540, 100)">
-      <rect width="170" height="90" fill="#1e1e2f" rx="14" stroke="#10b981" stroke-width="2" />
-      <image href="https://cdn.jsdelivr.net/npm/simple-icons@7.1/icons/docker.svg?color=ffffff"
-            x="15" y="25" width="40" height="40" 
-       style="filter: brightness(0) invert(1);" />
-      <text x="110" y="50" font-size="16" fill="#fff" text-anchor="middle">Docker Build</text>
-      <text x="110" y="70" font-size="12" fill="#9ca3af" text-anchor="middle">Push to ACR</text>
+    <!-- Arrow: GitHub → Actions -->
+    <path d="M600 170 L600 200" stroke="#3b82f6" stroke-width="3" marker-end="url(#arrow-blue)" stroke-dasharray="5,5" style="animation: dash 6s linear infinite;" />
+
+    <!-- ========== ANGULAR LANE (LEFT) ========== -->
+    <text x="300" y="300" font-size="18" font-weight="700" fill="#f97316" text-anchor="middle">ANGULAR APP</text>
+
+    <!-- Build Angular -->
+    <g transform="translate(150, 330)">
+      <rect width="200" height="90" fill="#1e1e2f" rx="16" stroke="#f97316" stroke-width="2.5" filter="url(#glow)" />
+      <circle cx="40" cy="45" r="26" fill="#f97316" />
+      <image href="https://cdn.jsdelivr.net/npm/simple-icons@7.1/icons/angular.svg?color=ffffff" x="27" y="32" width="26" height="26" />
+      <text x="125" y="40" font-size="16" font-weight="600" fill="#fff" text-anchor="middle">Build Angular</text>
+      <text x="125" y="65" font-size="12" fill="#9ca3af" text-anchor="middle">Docker Image</text>
     </g>
 
-    <!-- ACR -->
-    <g transform="translate(760, 100)">
-      <rect width="170" height="90" fill="#1e1e2f" rx="14" stroke="#8b5cf6" stroke-width="2" />
-      <image href="https://cdn.jsdelivr.net/npm/simple-icons@7.1/icons/microsoftazure.svg?color=ffffff"
-            x="15" y="25" width="40" height="40" 
-       style="filter: brightness(0) invert(1);" />
-      <text x="110" y="50" font-size="16" fill="#fff" text-anchor="middle">Azure ACR</text>
-      <text x="110" y="70" font-size="12" fill="#9ca3af" text-anchor="middle">Container Registry</text>
+    <!-- Push to ACR (Angular) -->
+    <g transform="translate(150, 450)">
+      <rect width="200" height="90" fill="#1e1e2f" rx="16" stroke="#8b5cf6" stroke-width="2.5" filter="url(#glow)" />
+      <circle cx="40" cy="45" r="26" fill="#8b5cf6" />
+      <image href="https://cdn.jsdelivr.net/npm/simple-icons@7.1/icons/azure.svg?color=ffffff" x="27" y="32" width="26" height="26" />
+      <text x="125" y="40" font-size="16" font-weight="600" fill="#fff" text-anchor="middle">Push to ACR</text>
+      <text x="125" y="65" font-size="12" fill="#9ca3af" text-anchor="middle">angular-app:latest</text>
     </g>
 
-    <!-- Web App -->
-    <g transform="translate(540, 260)">
-      <rect width="170" height="90" fill="#1e1e2f" rx="14" stroke="#10b981" stroke-width="2" />
-      <image href="https://cdn.jsdelivr.net/npm/simple-icons@7.1/icons/azurefunctions.svg?color=white"  x="15" y="25" width="40" height="40" 
-       style="filter: brightness(0) invert(1);" />
-       
-      <text x="110" y="50" font-size="16" fill="#fff" text-anchor="middle">Web App</text>
-      <text x="110" y="70" font-size="12" fill="#9ca3af" text-anchor="middle">Multi-Container</text>
+    <!-- Deploy Angular Web App -->
+    <g transform="translate(150, 570)">
+      <rect width="200" height="90" fill="#1e1e2f" rx="16" stroke="#f97316" stroke-width="2.5" filter="url(#glow)" />
+      <circle cx="40" cy="45" r="26" fill="#f97316" />
+      <image href="https://cdn.jsdelivr.net/npm/simple-icons@7.1/icons/azureappservices.svg?color=ffffff" x="27" y="32" width="26" height="26" />
+      <text x="125" y="40" font-size="16" font-weight="600" fill="#fff" text-anchor="middle">Angular Web App</text>
+      <text x="125" y="65" font-size="11" fill="#9ca3af" text-anchor="middle">angular-app-j4cy</text>
     </g>
 
-    <!-- az webapp config -->
-    <g transform="translate(440, 420)">
-      <rect width="370" height="70" fill="#2d1b69" rx="12" stroke="#8b5cf6" stroke-width="2" />
-      <text x="185" y="30" font-size="12" fill="#c7d2fe" text-anchor="middle">az webapp config container set</text>
-      <text x="185" y="50" font-size="10" fill="#a5b4fc" text-anchor="middle">--multicontainer-config-type COMPOSE --multicontainer-config-file docker-compose.yml</text>
+    <!-- Restart Angular -->
+    <g transform="translate(150, 690)">
+      <rect width="200" height="70" fill="url(#angular-gradient)" rx="14" stroke="#f97316" stroke-width="2" filter="url(#glow)" />
+      <defs>
+        <linearGradient id="angular-gradient" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#f97316" />
+          <stop offset="100%" stop-color="#f59e0b" />
+        </linearGradient>
+      </defs>
+      <text x="100" y="30" font-size="14" font-weight="600" fill="#fff" text-anchor="middle">🔄 Restart App</text>
+      <text x="100" y="52" font-size="9" fill="#fff9f0" opacity="0.9" text-anchor="middle">Live Update</text>
     </g>
 
-    <!-- Arrows -->
-    <path d="M270 145 L320 145" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrow-blue)" />
-    <path d="M490 145 L540 145" stroke="#ef4444" stroke-width="2" marker-end="url(#arrow-red)" />
-    <path d="M710 145 L760 145" stroke="#10b981" stroke-width="2" marker-end="url(#arrow-green)" />
-    <path d="M845 190 L845 305" stroke="#8b5cf6" stroke-width="2" />
-    <path d="M845 305 L710 305" stroke="#8b5cf6" stroke-width="2" marker-end="url(#arrow-blue)" />
-    <path d="M625 350 L625 420" stroke="#10b981" stroke-width="2" marker-end="url(#arrow-green)" />
+    <!-- Arrows: Angular Lane -->
+    <path d="M250 290 L250 330" stroke="#f97316" stroke-width="3" marker-end="url(#arrow-orange)" stroke-dasharray="5,5" style="animation: dash 6s linear infinite;" />
+    <path d="M250 420 L250 450" stroke="#f97316" stroke-width="3" marker-end="url(#arrow-orange)" stroke-dasharray="5,5" style="animation: dash 6s linear infinite;" />
+    <path d="M250 540 L250 570" stroke="#f97316" stroke-width="3" marker-end="url(#arrow-orange)" stroke-dasharray="5,5" style="animation: dash 6s linear infinite;" />
+    <path d="M250 660 L250 690" stroke="#f97316" stroke-width="3" marker-end="url(#arrow-orange)" stroke-dasharray="5,5" style="animation: dash 6s linear infinite;" />
 
-    <!-- Labels -->
-    <text x="395" y="125" font-size="12" fill="#3b82f6" text-anchor="middle">On push</text>
-    <text x="625" y="125" font-size="12" fill="#10b981" text-anchor="middle">Build & Push</text>
-    <text x="900" y="215" font-size="12" fill="#8b5cf6" text-anchor="middle">Image stored</text>
-    <text x="760" y="285" font-size="12" fill="#10b981" text-anchor="middle">Pulls images</text>
-    <text x="680" y="405" font-size="12" fill="#8b5cf6" text-anchor="middle">Deploys config</text>
+    <!-- ========== FLASK LANE (RIGHT) ========== -->
+    <text x="900" y="300" font-size="18" font-weight="700" fill="#10b981" text-anchor="middle">FLASK API</text>
+
+    <!-- Build Flask -->
+    <g transform="translate(750, 330)">
+      <rect width="200" height="90" fill="#1e1e2f" rx="16" stroke="#10b981" stroke-width="2.5" filter="url(#glow)" />
+      <circle cx="40" cy="45" r="26" fill="#10b981" />
+      <image href="https://cdn.jsdelivr.net/npm/simple-icons@7.1/icons/flask.svg?color=ffffff" x="27" y="32" width="26" height="26" />
+      <text x="125" y="40" font-size="16" font-weight="600" fill="#fff" text-anchor="middle">Build Flask</text>
+      <text x="125" y="65" font-size="12" fill="#9ca3af" text-anchor="middle">Docker Image</text>
+    </g>
+
+    <!-- Push to ACR (Flask) -->
+    <g transform="translate(750, 450)">
+      <rect width="200" height="90" fill="#1e1e2f" rx="16" stroke="#8b5cf6" stroke-width="2.5" filter="url(#glow)" />
+      <circle cx="40" cy="45" r="26" fill="#8b5cf6" />
+      <image href="https://cdn.jsdelivr.net/npm/simple-icons@7.1/icons/azure.svg?color=ffffff" x="27" y="32" width="26" height="26" />
+      <text x="125" y="40" font-size="16" font-weight="600" fill="#fff" text-anchor="middle">Push to ACR</text>
+      <text x="125" y="65" font-size="12" fill="#9ca3af" text-anchor="middle">flask-app:latest</text>
+    </g>
+
+    <!-- Deploy Flask Web App -->
+    <g transform="translate(750, 570)">
+      <rect width="200" height="90" fill="#1e1e2f" rx="16" stroke="#10b981" stroke-width="2.5" filter="url(#glow)" />
+      <circle cx="40" cy="45" r="26" fill="#10b981" />
+      <image href="https://cdn.jsdelivr.net/npm/simple-icons@7.1/icons/azureappservices.svg?color=ffffff" x="27" y="32" width="26" height="26" />
+      <text x="125" y="40" font-size="16" font-weight="600" fill="#fff" text-anchor="middle">Flask Web App</text>
+      <text x="125" y="65" font-size="11" fill="#9ca3af" text-anchor="middle">flask-app-j4cy</text>
+    </g>
+
+    <!-- Restart Flask -->
+    <g transform="translate(750, 690)">
+      <rect width="200" height="70" fill="url(#flask-gradient)" rx="14" stroke="#10b981" stroke-width="2" filter="url(#glow)" />
+      <defs>
+        <linearGradient id="flask-gradient" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#10b981" />
+          <stop offset="100%" stop-color="#059669" />
+        </linearGradient>
+      </defs>
+      <text x="100" y="30" font-size="14" font-weight="600" fill="#fff" text-anchor="middle">🔄 Restart App</text>
+      <text x="100" y="52" font-size="9" fill="#ecfdf5" opacity="0.9" text-anchor="middle">Live Update</text>
+    </g>
+
+    <!-- Arrows: Flask Lane -->
+    <path d="M850 290 L850 330" stroke="#10b981" stroke-width="3" marker-end="url(#arrow-green)" stroke-dasharray="5,5" style="animation: dash 6s linear infinite;" />
+    <path d="M850 420 L850 450" stroke="#10b981" stroke-width="3" marker-end="url(#arrow-green)" stroke-dasharray="5,5" style="animation: dash 6s linear infinite;" />
+    <path d="M850 540 L850 570" stroke="#10b981" stroke-width="3" marker-end="url(#arrow-green)" stroke-dasharray="5,5" style="animation: dash 6s linear infinite;" />
+    <path d="M850 660 L850 690" stroke="#10b981" stroke-width="3" marker-end="url(#arrow-green)" stroke-dasharray="5,5" style="animation: dash 6s linear infinite;" />
+
+    <!-- Shared Trigger Arrows -->
+    <path d="M600 290 Q500 310 350 310 Q250 310 250 330" fill="none" stroke="#f97316" stroke-width="2.5" stroke-dasharray="5,5" style="animation: dash 8s linear infinite;" marker-end="url(#arrow-orange)" />
+    <path d="M600 290 Q700 310 850 310 Q950 310 850 330" fill="none" stroke="#10b981" stroke-width="2.5" stroke-dasharray="5,5" style="animation: dash 8s linear infinite;" marker-end="url(#arrow-green)" />
+
+    <!-- ACR Shared Note -->
+    <text x="600" y="420" font-size="14" font-style="italic" fill="#a78bfa" text-anchor="middle">Both images stored in Azure Container Registry</text>
+
+    <style>
+      @keyframes dash {
+        to { stroke-dashoffset: 1000; }
+      }
+    </style>
   </svg>
 
-  <ul class="card-list option2">
-  <li>On every push → build Docker images</li>
-  <li>Push to Azure Container Registry (ACR)</li>
-  <li>Update Web App with new compose file</li>
-  <li>Restart app → live update</li>
-</ul>
+  <div style="margin-top: 2.5rem; background: rgba(30,30,47,0.6); padding: 1.75rem; border-radius: 16px; border: 1px solid #374151; backdrop-filter: blur(10px);">
+    <ul style="list-style: none; padding: 0; margin: 0; font-size: 1.1rem; color: #e2e8f0; line-height: 2;">
+      <li>✅ <strong>Parallel Builds</strong> — Angular & Flask built independently</li>
+      <li>✅ <strong>ACR Storage</strong> — both images pushed to registry</li>
+      <li>✅ <strong>Independent Deployments</strong> — each app updated separately</li>
+      <li>✅ <strong>Guaranteed Restarts</strong> — both apps restarted for live updates</li>
+      <li>✅ <strong>No Arrow Conflicts</strong> — clean vertical lanes for readability</li>
+    </ul>
+  </div>
 </div>
