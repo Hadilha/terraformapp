@@ -10,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      ACR_NAME: appregistrydx8a
-      ACR_LOGIN_SERVER: appregistrydx8a.azurecr.io
+      ACR_NAME: appregistryj4cy
+      ACR_LOGIN_SERVER: appregistryj4cy.azurecr.io
 
     steps:
     - name: Checkout code
